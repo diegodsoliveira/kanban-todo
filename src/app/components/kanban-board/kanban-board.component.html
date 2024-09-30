@@ -1,0 +1,50 @@
+<div class="flex space-x-4 p-4">
+  <div class="w-1/3">
+    <h2 class="text-xl font-bold mb-2">Todo</h2>
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[doneList, inProgressList]"
+      (cdkDropListDropped)="drop($event)"
+      class="bg-gray-100 rounded-lg shadow-md p-4"
+    >
+      @for (task of todo; track task) {
+      <app-card [task]="task" cdkDrag></app-card>
+      }
+    </div>
+  </div>
+
+  <div class="w-1/3">
+    <h2 class="text-xl font-bold mb-2">In Progress</h2>
+    <div
+      cdkDropList
+      #inProgressList="cdkDropList"
+      [cdkDropListData]="inProgress"
+      [cdkDropListConnectedTo]="[todoList, doneList]"
+      (click)="logClick($event)"
+      (cdkDropListDropped)="drop($event)"
+      class="bg-gray-100 rounded-lg shadow-md p-4"
+    >
+      @for (task of inProgress; track task) {
+      <app-card [task]="task" cdkDrag></app-card>
+      }
+    </div>
+  </div>
+
+  <div class="w-1/3">
+    <h2 class="text-xl font-bold mb-2">Done</h2>
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[inProgressList, todoList]"
+      (cdkDropListDropped)="drop($event)"
+      class="bg-gray-100 rounded-lg shadow-md p-4"
+    >
+      @for (task of done; track task) {
+      <app-card [task]="task" cdkDrag></app-card>
+      }
+    </div>
+  </div>
+</div>
